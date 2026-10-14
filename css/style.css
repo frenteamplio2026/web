@@ -785,12 +785,16 @@ li {
   width: 100%;
 }
 
+.thanks-share-img-link {
+  display: inline-block;
+  margin: 0 auto 0;
+}
+
 .thanks-share-img {
   display: inline-block;
   width: 100%;
   max-width: 400px;
   height: auto;
-  margin: 0 auto 10px;
 }
 
 .thanks-channel-info {
