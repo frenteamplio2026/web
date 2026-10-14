@@ -439,14 +439,16 @@ li {
 .form-message {
   margin: 0;
   min-height: 1.5em;
+  padding: 6px 12px;
+  color: var(--color-text);
 }
 
 .form-message.is-error {
-  color: var(--color-form-message-error);
+  background: var(--color-form-message-error);
 }
 
 .form-message.is-success {
-  color: var(--color-form-message-success);
+  background: var(--color-form-message-success);
 }
 
 .join-form input {
