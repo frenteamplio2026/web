@@ -505,6 +505,7 @@ li {
 }
 
 .join-form .consent input[type="checkbox"] {
+  flex: 0 0 24px;
   width: 24px;
   height: 24px;
   accent-color: var(--color-form-checkbox);
