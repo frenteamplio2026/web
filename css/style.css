@@ -460,7 +460,23 @@ li {
   outline: 2px solid rgba(220, 38, 38, 0.3);
 }
 
+.join-form select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--color-form-border);
+  border-radius: 12px;
+  background: var(--color-bg);
+  color: var(--color-form-text);
+  font: inherit;
+}
+
+.join-row label:has(select:required) > span::after {
+  content: " *";
+  color: var(--color-form-required);
+}
+
 .join-form input[type="text"],
+.join-form input[type="tel"],
 .join-form input[type="email"] {
   width: 100%;
   padding: 14px 16px;
@@ -471,7 +487,8 @@ li {
   font: inherit;
 }
 
-.join-form input:focus-visible {
+.join-form input:focus-visible,
+.join-form select:focus-visible {
   outline-color: var(--color-form-focus);
 }
 

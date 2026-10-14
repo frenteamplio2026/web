@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Acreditaciones de prensa - Frente Amplio</title>
+  <meta name="description" content="Acreditaciones de prensa para el acto de lanzamiento del Frente Amplio en Madrid.">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Frente Amplio">
+  <meta property="og:title" content="Acreditaciones de prensa - Frente Amplio">
+  <meta property="og:description" content="Acreditaciones de prensa para el acto de lanzamiento del Frente Amplio en Madrid.">
+  <meta property="og:url" content="https://frenteamplio.info/prensa.html">
+  <meta property="og:image" content="https://frenteamplio.info/img/og.png">
+  <meta property="og:image:alt" content="Frente Amplio">
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Frente Amplio" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="body-textpage">
+  <header class="site-header">
+    <a class="logo" href="./">
+      <img src="/img/logo.svg" alt="Logo del Frente Amplio" width="240px" height="32px">
+    </a>
+  </header>
+
+  <main>
+    <section class="join">
+      <div class="join-inner">
+        <h1>Acreditaciones de prensa</h1>
+        <p class="join-claim">
+          <strong>
+            Acto de lanzamiento del Frente Amplio en Madrid.<br>
+            Acreditaciones abiertas hasta las 17:00 horas del viernes 16 de octubre.<br>
+            Os confirmaremos acreditación.
+          </strong>
+        </p>
+
+        <form id="press-form" class="join-form" action="#" method="post">
+          <div class="join-row">
+            <label>
+              <span>Nombre</span>
+              <input id="name" name="name" type="text" autocomplete="given-name" maxlength="100" required>
+            </label>
+            <label>
+              <span>Apellidos</span>
+              <input id="surname" name="surname" type="text" autocomplete="family-name" maxlength="100">
+            </label>
+          </div>
+          <div class="join-row">
+            <label>
+              <span>Medio</span>
+              <input id="outlet" name="outlet" type="text" autocomplete="organization" maxlength="100" required>
+            </label>
+            <label>
+              <span>Función en el medio</span>
+              <select id="role" name="role" required>
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option value="Redactor/a">Redactor/a</option>
+                <option value="Cámara de TV">Cámara de TV</option>
+                <option value="Reportero/a gráfico/a (Foto)">Reportero/a gráfico/a (Foto)</option>
+              </select>
+            </label>
+          </div>
+          <div class="join-row">
+            <label>
+              <span>Teléfono</span>
+              <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" maxlength="9" pattern="[0-9]{9}" title="Introduce 9 dígitos, sin espacios." required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="255" required>
+            </label>
+          </div>
+          <div class="join-row join-row--hpot" aria-hidden="true">
+            <label>
+              <span>País</span>
+              <input id="country" name="country" type="text" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" value="true" required>
+            <label for="consent">He leído y acepto la <a href="./privacidad.html" target="_blank" rel="noopener">política de privacidad</a></label>
+          </div>
+
+          <div id="turnstile"></div>
+
+          <button id="submit-button" class="btn" type="submit">Solicitar acreditación</button>
+
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-row">
+      <nav>
+        <ul>
+          <li><a href="/legal.html">Aviso legal</a></li>
+          <li><a href="/privacidad.html">Política de privacidad</a></li>
+          <li><a href="/cookies.html">Política de cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="./js/prensa.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" onerror="onTurnstileLoadError()" defer></script>
+</body>
+</html>
