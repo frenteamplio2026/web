@@ -3,20 +3,103 @@ const COUNT_URL = 'https://frenteamplio-signup.frenteamplio.workers.dev/count';
 const TURNSTILE_SITE_KEY = '0x4AAAAAAFQRcrN2tzmkFM46';
 const TOKEN_TIMEOUT = 30 * 1000; // milisegundos
 
-const SUCCESS_MESSAGE = 'Registrado con éxito! Gracias por apuntarte!';
-const FIELD_LABELS = {
-  name: 'nombre',
-  surname: 'apellidos',
-  email: 'email',
-  postal_code: 'código postal',
-  consent: 'aceptación de la política de privacidad'
+// Idioma: redirige según localStorage o el idioma del navegador; las páginas viven en /, /cat/, /gal/, /eu/.
+const LANG_PATHS = { es: '/', ca: '/cat/', gl: '/gal/', eu: '/eu/' };
+const LANG_KEY = 'lang';
+const currentLang = document.documentElement.lang in LANG_PATHS ? document.documentElement.lang : 'es';
+
+function storeLang(lang) {
+  try { localStorage.setItem(LANG_KEY, lang); } catch { /* almacenamiento no disponible */ }
+}
+
+function preferredLang() {
+  try {
+    const stored = localStorage.getItem(LANG_KEY);
+    if (stored in LANG_PATHS) return stored;
+  } catch { /* almacenamiento no disponible */ }
+  for (const tag of navigator.languages ?? [navigator.language]) {
+    const base = String(tag).toLowerCase().split('-')[0];
+    if (base in LANG_PATHS) return base;
+  }
+  return 'es';
+}
+
+const targetLang = preferredLang();
+if (targetLang !== currentLang) {
+  const page = location.pathname.endsWith('gracias.html') ? 'gracias.html' : '';
+  location.replace(LANG_PATHS[targetLang] + page + location.search + location.hash);
+} else {
+  storeLang(currentLang);
+}
+
+for (const link of document.querySelectorAll('.lang-switch a[data-lang]')) {
+  link.addEventListener('click', () => storeLang(link.dataset.lang));
+}
+
+const MESSAGES = {
+  es: {
+    success: 'Registrado con éxito! Gracias por apuntarte!',
+    fields: { name: 'nombre', surname: 'apellidos', email: 'email', postal_code: 'código postal', consent: 'aceptación de la política de privacidad' },
+    errors: {
+      captcha_failed: 'No hemos podido verificar el envío. Recarga la página e inténtalo de nuevo.',
+      rate_limited: 'Demasiados envíos. Espera un minuto e inténtalo de nuevo.',
+      turnstile_not_loaded: 'No se pudo cargar la verificación antispam. Si usas un bloqueador de contenido, desactívalo para esta página.'
+    },
+    defaultError: 'No se pudo registrar. Por favor, inténtalo de nuevo.',
+    review: 'Revisa estos campos:',
+    sending: 'Enviando...',
+    submit: 'Apuntarme',
+    count: 'apoyos recibidos'
+  },
+  ca: {
+    success: 'Registrat amb èxit! Gràcies per apuntar-te!',
+    fields: { name: 'nom', surname: 'cognoms', email: 'correu electrònic', postal_code: 'codi postal', consent: 'acceptació de la política de privacitat' },
+    errors: {
+      captcha_failed: 'No hem pogut verificar l\'enviament. Recarrega la pàgina i torna-ho a provar.',
+      rate_limited: 'Massa enviaments. Espera un minut i torna-ho a provar.',
+      turnstile_not_loaded: 'No s\'ha pogut carregar la verificació antispam. Si fas servir un bloquejador de contingut, desactiva\'l per a aquesta pàgina.'
+    },
+    defaultError: 'No s\'ha pogut registrar. Si us plau, torna-ho a provar.',
+    review: 'Revisa aquests camps:',
+    sending: 'Enviant...',
+    submit: 'Apuntar-me',
+    count: 'suports rebuts'
+  },
+  gl: {
+    success: 'Rexistrado con éxito! Grazas por apuntarte!',
+    fields: { name: 'nome', surname: 'apelidos', email: 'correo electrónico', postal_code: 'código postal', consent: 'aceptación da política de privacidade' },
+    errors: {
+      captcha_failed: 'Non puidemos verificar o envío. Recarga a páxina e téntao de novo.',
+      rate_limited: 'Demasiados envíos. Agarda un minuto e téntao de novo.',
+      turnstile_not_loaded: 'Non se puido cargar a verificación antispam. Se usas un bloqueador de contido, desactívao para esta páxina.'
+    },
+    defaultError: 'Non se puido rexistrar. Por favor, téntao de novo.',
+    review: 'Revisa estes campos:',
+    sending: 'Enviando...',
+    submit: 'Apuntarme',
+    count: 'apoios recibidos'
+  },
+  eu: {
+    success: 'Ondo erregistratu da! Eskerrik asko izena emateagatik!',
+    fields: { name: 'izena', surname: 'abizenak', email: 'posta elektronikoa', postal_code: 'posta kodea', consent: 'pribatutasun-politikaren onarpena' },
+    errors: {
+      captcha_failed: 'Ezin izan dugu bidalketa egiaztatu. Kargatu orria berriro eta saiatu berriro.',
+      rate_limited: 'Bidalketa gehiegi. Itxaron minutu bat eta saiatu berriro.',
+      turnstile_not_loaded: 'Ezin izan da spam-aren aurkako egiaztapena kargatu. Eduki-blokeatzailerik erabiltzen baduzu, desaktibatu orri honetarako.'
+    },
+    defaultError: 'Ezin izan da erregistratu. Mesedez, saiatu berriro.',
+    review: 'Berrikusi eremu hauek:',
+    sending: 'Bidaltzen...',
+    submit: 'Izena eman',
+    count: 'babes jaso dira'
+  }
 };
-const ERROR_MESSAGES = {
-  captcha_failed: 'No hemos podido verificar el envío. Recarga la página e inténtalo de nuevo.',
-  rate_limited: 'Demasiados envíos. Espera un minuto e inténtalo de nuevo.',
-  turnstile_not_loaded: 'No se pudo cargar la verificación antispam. Si usas un bloqueador de contenido, desactívalo para esta página.'
-};
-const DEFAULT_ERROR = 'No se pudo registrar. Por favor, inténtalo de nuevo.';
+const T = MESSAGES[currentLang];
+const SUCCESS_MESSAGE = T.success;
+const FIELD_LABELS = T.fields;
+const ERROR_MESSAGES = T.errors;
+const DEFAULT_ERROR = T.defaultError;
+const LOCALES = { es: 'es-ES', ca: 'ca-ES', gl: 'gl-ES', eu: 'eu-ES' };
 
 const form = document.querySelector('#registration-form');
 const submitButton = document.querySelector('#submit-button');
@@ -25,18 +108,15 @@ const hdp = document.querySelector(`#country`);
 const signupCount = document.querySelector('#signup-count');
 
 async function loadSignupCount() {
+  if (!signupCount) return;
   try {
     const response = await fetch(COUNT_URL);
     if (!response.ok) return;
     const { count } = await response.json();
     if (!Number.isInteger(count) || count < 10000) return;
-    signupCount.innerHTML = `<strong>${count.toLocaleString('es-ES')}</strong> apoyos recibidos`;
+    signupCount.innerHTML = `<strong>${count.toLocaleString(LOCALES[currentLang])}</strong> ${T.count}`;
     signupCount.hidden = false;
-  } catch {
-    // const count = 12345;
-    // signupCount.innerHTML = `<strong>${count.toLocaleString('es-ES')}</strong> apoyos recibidos`;
-    // signupCount.hidden = false;
-  }
+  } catch {}
 }
 
 loadSignupCount();
@@ -138,7 +218,7 @@ function showError(error, fields = []) {
   }
   for (const field of fields) form.elements[field]?.setAttribute('aria-invalid', 'true');
   form.elements[fields[0]]?.focus();
-  showMessage(`Revisa estos campos: ${fields.map((f) => FIELD_LABELS[f] ?? f).join(', ')}.`, 'error');
+  showMessage(`${T.review} ${fields.map((f) => FIELD_LABELS[f] ?? f).join(', ')}.`, 'error');
 }
 
 function showSuccess() {
@@ -146,9 +226,9 @@ function showSuccess() {
   showMessage(SUCCESS_MESSAGE, 'success');
 }
 
-form.addEventListener('input', (event) => event.target.removeAttribute('aria-invalid'));
+form?.addEventListener('input', (event) => event.target.removeAttribute('aria-invalid'));
 
-form.addEventListener('submit', async (event) => {
+form?.addEventListener('submit', async (event) => {
   event.preventDefault();
   clearFeedback();
 
@@ -158,7 +238,7 @@ form.addEventListener('submit', async (event) => {
   }
 
   submitButton.disabled = true;
-  submitButton.textContent = 'Enviando...';
+  submitButton.textContent = T.sending;
 
   try {
     const body = new URLSearchParams(new FormData(form));
@@ -178,6 +258,6 @@ form.addEventListener('submit', async (event) => {
   } finally {
     resetTurnstile();
     submitButton.disabled = false;
-    submitButton.textContent = 'Apuntarme';
+    submitButton.textContent = T.submit;
   }
 });

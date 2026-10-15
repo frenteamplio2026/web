@@ -293,6 +293,29 @@ li {
   color: inherit;
 }
 
+.lang-switch {
+  display: flex;
+  gap: 4px;
+}
+
+.lang-switch a {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lang-switch a[aria-current] {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.body-thanks .lang-switch a[aria-current] {
+  background: var(--color-bg);
+  color: var(--color-primary);
+}
+
 .body-thanks .site-header,
 .body-textpage .site-header {
   background: var(--color-primary);
