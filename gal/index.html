@@ -30,9 +30,6 @@
     p{margin:0 0 24px;font-size:clamp(16px,2vw,20px)}
     .site-header{display:flex;align-items:center;justify-content:space-between;padding:10px clamp(16px,4vw,48px)}
     .site-header a{color:inherit}
-    .lang-switch{display:flex;gap:4px}
-    .lang-switch a{padding:4px 8px;border-radius:4px;font-size:14px;font-weight:700;text-decoration:none}
-    .lang-switch a[aria-current]{background:#18181b;color:#fff}
     .social{display:flex;flex-wrap:wrap;gap:20px;padding:0;list-style:none}
     .social li a{color:inherit;text-decoration:none}
     .social li a span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
@@ -49,7 +46,10 @@
     <a class="logo" href="/gal/">
       <img src="/img/logo.svg" alt="Logotipo da Fronte Ampla" width="240px" height="32px">
     </a>
-    <nav class="lang-switch" aria-label="Idioma"><a href="/" lang="es" hreflang="es" data-lang="es" title="Español">ES</a><a href="/cat/" lang="ca" hreflang="ca" data-lang="ca" title="Català">CAT</a><a href="/gal/" lang="gl" hreflang="gl" data-lang="gl" title="Galego" aria-current="true">GAL</a><a href="/eu/" lang="eu" hreflang="eu" data-lang="eu" title="Euskara">EUS</a></nav>
+    <div class="header-actions">
+      <nav class="lang-switch" aria-label="Idioma"><a href="/" lang="es" hreflang="es" data-lang="es" title="Español">ES</a><a href="/cat/" lang="ca" hreflang="ca" data-lang="ca" title="Català">CAT</a><a href="/gal/" lang="gl" hreflang="gl" data-lang="gl" title="Galego" aria-current="true">GAL</a><a href="/eu/" lang="eu" hreflang="eu" data-lang="eu" title="Euskara">EUS</a></nav>
+      <a class="btn btn-small" href="https://cause.lundadonate.org/frenteamplio/donar" target="_blank" rel="noopener">Doa</a>
+    </div>
   </header>
 
   <main>

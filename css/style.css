@@ -254,6 +254,7 @@ li {
   opacity: 0;
   animation: flash 100ms ease-in-out;
   transform: scaleX(2) scaleY(2);
+  pointer-events: none;
 }
 
 .btn:hover::before {
@@ -281,29 +282,58 @@ li {
 }
 
 /** Header **/
-
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px clamp(16px, 4vw, 48px);
+  gap: 10px;
 }
 
 .site-header a {
   color: inherit;
 }
 
+.site-header a.btn {
+  color: var(--color-text);
+  padding: 4px 12px 3px;
+}
+
+.site-header a.btn::before {
+  display: none !important;
+  content: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .lang-switch {
   display: flex;
-  gap: 4px;
+  gap: 0;
 }
 
 .lang-switch a {
-  padding: 4px 8px;
+  padding: 4px 6px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
+}
+
+@media screen and (min-width: 760px) {
+  .header-actions {
+    gap: 20px;
+  }
+  .lang-switch {
+    gap: 4px;
+  }
+  .lang-switch a {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
 }
 
 .lang-switch a[aria-current] {
@@ -319,6 +349,11 @@ li {
 .body-thanks .site-header,
 .body-textpage .site-header {
   background: var(--color-primary);
+}
+
+.body-thanks .site-header a.btn {
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .logo {
