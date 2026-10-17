@@ -45,7 +45,7 @@ const MESSAGES = {
       rate_limited: 'Demasiados envíos. Espera un minuto e inténtalo de nuevo.',
       turnstile_not_loaded: 'No se pudo cargar la verificación antispam. Si usas un bloqueador de contenido, desactívalo para esta página.'
     },
-    defaultError: 'No se pudo registrar. Por favor, inténtalo de nuevo.',
+    defaultError: 'Algo ha debido de salir mal. Por favor, inténtalo de nuevo en unos minutos.',
     review: 'Revisa estos campos:',
     sending: 'Enviando...',
     submit: 'Apuntarme',
@@ -59,7 +59,7 @@ const MESSAGES = {
       rate_limited: 'Massa enviaments. Espera un minut i torna-ho a provar.',
       turnstile_not_loaded: 'No s\'ha pogut carregar la verificació antispam. Si fas servir un bloquejador de contingut, desactiva\'l per a aquesta pàgina.'
     },
-    defaultError: 'No s\'ha pogut registrar. Si us plau, torna-ho a provar.',
+    defaultError: 'Alguna cosa hauria de sortir malament. Si us plau, torna-ho a provar en uns minuts.',
     review: 'Revisa aquests camps:',
     sending: 'Enviant...',
     submit: 'Apuntar-me',
@@ -73,7 +73,7 @@ const MESSAGES = {
       rate_limited: 'Demasiados envíos. Agarda un minuto e téntao de novo.',
       turnstile_not_loaded: 'Non se puido cargar a verificación antispam. Se usas un bloqueador de contido, desactívao para esta páxina.'
     },
-    defaultError: 'Non se puido rexistrar. Por favor, téntao de novo.',
+    defaultError: 'Algo fallou. Por favor, téntao de novo en uns minutos.',
     review: 'Revisa estes campos:',
     sending: 'Enviando...',
     submit: 'Apuntarme',
@@ -87,7 +87,7 @@ const MESSAGES = {
       rate_limited: 'Bidalketa gehiegi. Itxaron minutu bat eta saiatu berriro.',
       turnstile_not_loaded: 'Ezin izan da spam-aren aurkako egiaztapena kargatu. Eduki-blokeatzailerik erabiltzen baduzu, desaktibatu orri honetarako.'
     },
-    defaultError: 'Ezin izan da erregistratu. Mesedez, saiatu berriro.',
+    defaultError: 'Zerbait gaizki atera da. Mesedez, saiatu berriro minutu batzuetara.',
     review: 'Berrikusi eremu hauek:',
     sending: 'Bidaltzen...',
     submit: 'Izena eman',
